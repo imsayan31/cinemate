@@ -30,6 +30,10 @@
       margin-bottom: 20px;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     .movie-card {
       background-color: #2a2a2a;
       border: 1px solid #3a3a3a;
@@ -119,6 +123,7 @@
           padding: 8px 20px;
           font-weight: bold;
           transition: all 0.3s ease;
+          cursor: pointer;
 
           &:hover {
             background-color: #ff5722;

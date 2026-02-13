@@ -1,0 +1,143 @@
+// NotFound page styles
+.notfound-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  padding: 40px 0;
+
+  .notfound-column {
+    display: flex;
+    justify-content: center;
+  }
+
+  .notfound-box {
+    text-align: center;
+    padding: 60px 40px;
+    background-color: #2a2a2a;
+    border-radius: 15px;
+    border: 2px solid #ff6b35;
+    box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+
+    .error-code {
+      font-size: 120px;
+      font-weight: bold;
+      color: #ff6b35;
+      margin: 0;
+      line-height: 1;
+      text-shadow: 0 4px 10px rgba(255, 107, 53, 0.5);
+    }
+
+    .error-title {
+      font-size: 36px;
+      color: #fff;
+      margin: 20px 0 15px 0;
+      font-weight: bold;
+    }
+
+    .error-description {
+      font-size: 16px;
+      color: #bbb;
+      margin-bottom: 30px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .error-icon {
+      font-size: 80px;
+      margin: 30px 0;
+      animation: bounce 2s infinite;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .btn-home,
+      .btn-movies {
+        background-color: #ff6b35;
+        border: none;
+        padding: 12px 30px;
+        font-weight: bold;
+        border-radius: 5px;
+        color: #fff;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+
+        i {
+          font-size: 18px;
+        }
+
+        &:hover {
+          background-color: #ff5722;
+          transform: translateY(-3px);
+          box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+          color: #fff;
+        }
+      }
+
+      .btn-movies {
+        background-color: transparent;
+        border: 2px solid #ff6b35;
+        color: #ff6b35;
+
+        &:hover {
+          background-color: #ff6b35;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .notfound-container {
+    padding: 20px 0;
+
+    .notfound-box {
+      padding: 40px 20px;
+
+      .error-code {
+        font-size: 80px;
+      }
+
+      .error-title {
+        font-size: 28px;
+      }
+
+      .error-description {
+        font-size: 14px;
+      }
+
+      .error-icon {
+        font-size: 60px;
+      }
+
+      .button-group {
+        flex-direction: column;
+
+        .btn-home,
+        .btn-movies {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

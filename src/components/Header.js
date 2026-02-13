@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import '../styles/Header.scss';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
@@ -13,9 +14,9 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="nav-menu">
-            <Nav.Link href="#home" className="nav-link">Home</Nav.Link>
-            <Nav.Link href="#movies" className="nav-link">Movies</Nav.Link>
-            <Nav.Link href="#contact" className="nav-link">Contact</Nav.Link>
+            <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Home</NavLink>
+            <NavLink to="/movies" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Movies</NavLink>
+            <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Contact</NavLink>
             <Button className="user-btn" href="#signin">
               <i className="fas fa-user"></i>
             </Button>

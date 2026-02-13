@@ -1,8 +1,18 @@
 import './App.scss';
-import Home from './components/Home';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import AllRoutes from './Routes';
 
 function App() {
-  return <Home />;
+  return (
+    <div className="app-container">
+      <Header />
+      <main className="main-wrapper">
+        <AllRoutes />
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
