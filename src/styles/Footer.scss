@@ -1,0 +1,68 @@
+// Footer styles
+.footer-custom {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 30px 0;
+  margin-top: 60px;
+  border-top: 2px solid #ff6b35;
+
+  .footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .copyright {
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: #bbb;
+      }
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      justify-content: flex-end;
+
+      @media (max-width: 768px) {
+        justify-content: flex-start;
+        margin-top: 20px;
+      }
+
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: #ff6b35;
+        color: white;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        font-size: 16px;
+
+        &:hover {
+          background-color: #ff5722;
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .copyright {
+        width: 100%;
+      }
+
+      .social-icons {
+        width: 100%;
+      }
+    }
+  }
+}
