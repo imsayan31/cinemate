@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import '../styles/MovieListing.scss';
-import { Link } from 'react-router-dom';
+
+import MovieListView from './MovieListView';
+import MovieGridView from './MovieGridView';
 
 function MovieListing() {
     const [movies, setMovies] = useState([]);
+    const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
 
     useEffect(() => {
         // Simulate fetching data from an API
@@ -23,34 +26,36 @@ function MovieListing() {
           <h2>Now Showing</h2>
           <p>Book your tickets for the latest blockbuster movies</p>
         </div>
-        <section className="movies-filter-section">
-            
+        <section className="movies-filter-section" aria-label="View toggle">
+            <button
+              className={`view-toggle-btn ${viewMode === 'list' ? 'active' : ''}`}
+              aria-pressed={viewMode === 'list'}
+              title="List view"
+              onClick={() => setViewMode('list')}
+            >
+              <i className="bi-list-ul" aria-hidden="true"></i>
+              <span className="sr-only">List view</span>
+            </button>
+
+            <button
+              className={`view-toggle-btn ${viewMode === 'grid' ? 'active' : ''}`}
+              aria-pressed={viewMode === 'grid'}
+              title="Grid view"
+              onClick={() => setViewMode('grid')}
+            >
+              <i className="bi-grid-fill" aria-hidden="true"></i>
+              <span className="sr-only">Grid view</span>
+            </button>
         </section>
-        <Row className="movies-grid">
-          {movies.slice(0, 4).map(movie => (
-            <Col lg={4} md={6} sm={12} key={movie.id} className="movie-col">
-              <Link to={`/movie/${movie.id}`} className="movie-link">
-                <Card className="movie-card">
-                    <Card.Body>
-                    <div className="movie-image">
-                        <img src={movie.poster} alt={movie.title} className="poster-image" />
-                        </div>
-                    <Card.Title>{movie.title}</Card.Title>
-                    <div className="movie-meta">
-                        <span className="genre">{movie.genre}</span>
-                        <span className="rating">⭐ {movie.rating}</span>
-                    </div>
-                    <Card.Text className="description">{movie.description}</Card.Text>
-                    <div className="movie-footer">
-                        <span className="price">{movie.price}</span>
-                        <Button variant="primary" className="book-btn">Book Now</Button>
-                    </div>
-                    </Card.Body>
-                </Card>
-              </Link>
-            </Col>
-          ))}
-        </Row>
+        {viewMode === 'list' ? (
+          <div className="movies-list-container">
+            <MovieListView movies={movies} />
+          </div>
+        ) : (
+          <Row className="movies-grid">
+            <MovieGridView movies={movies} />
+          </Row>
+        )}
       </Container>
     </section>
   );
