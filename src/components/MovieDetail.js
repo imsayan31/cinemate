@@ -3,21 +3,31 @@ import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import '../styles/MovieDetail.scss';
 import useFormatDate from '../hooks/useFormatDate';
+import Loader from './Loader';
 
 function MovieDetail() {
   const { id } = useParams();
   const [movieDetail, setMovieDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Fetch movie details using the id from the URL
     // For now, we will use dummy data
     async function fetchMovieDetails() {
-      // Simulate API call to fetch movie details
-      // Replace with actual API endpoint and logic
-      const responseDetails = await fetch(`https://fooapi.com/api/movies/${id}`);
-      const responseJsonDetails = await responseDetails.json();
-      console.log(`Fetching details for movie ID:`, responseJsonDetails.data); // Log the fetched movie ID
-      setMovieDetail(responseJsonDetails.data);
+      setLoading(true);
+      try {
+        // Simulate API call to fetch movie details
+        // Replace with actual API endpoint and logic
+        const responseDetails = await fetch(`https://fooapi.com/api/movies/${id}`);
+        const responseJsonDetails = await responseDetails.json();
+        console.log(`Fetching details for movie ID:`, responseJsonDetails.data); // Log the fetched movie ID
+        setMovieDetail(responseJsonDetails.data);
+      } catch (err) {
+        console.error('Failed to fetch movie details', err);
+      } finally {
+        setLoading(false);
+      }
+
     }
     fetchMovieDetails();
   }, [id]);
@@ -51,6 +61,7 @@ function MovieDetail() {
 
   return (
     <div className="movie-detail-page">
+      {loading && <Loader />}
       {/* Hero Section */}
       <div className="movie-hero">
         <Container>
@@ -58,7 +69,7 @@ function MovieDetail() {
             <Col lg={4} md={6} sm={12} className="movie-poster-col">
               <div className="movie-poster">
                 <div className="poster-image">
-                    <img src={movieDetail?.poster || movie.image} alt={movieDetail?.title} className="poster-image" />
+                  <img src={movieDetail?.poster || movie.image} alt={movieDetail?.title} className="poster-image" />
                 </div>
               </div>
             </Col>
@@ -66,7 +77,7 @@ function MovieDetail() {
             <Col lg={8} md={6} sm={12} className="movie-info-col">
               <div className="movie-info">
                 <h1 className="movie-title">{movieDetail?.title} ({movieDetail?.year})</h1>
-                
+
                 <div className="movie-meta">
                   <span className="genre-badge">{movieDetail?.genre}</span>
                   <span className="rating-badge">⭐ {movieDetail?.imdbRating || movie.rating}/10</span>
