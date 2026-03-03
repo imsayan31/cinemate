@@ -13,7 +13,7 @@ function MovieGridView({ movies = [], loading }) {
             setMovieList(movies.slice(0, 4));
             setHasMore(true);
         }
-    }, [movies.length]);
+    }, [movies, movies.length]);
     const fetchMoreData = () => {
         if (movieList.length >= movies.length) {
             setHasMore(false);
@@ -51,6 +51,7 @@ function MovieGridView({ movies = [], loading }) {
                                     <div className="movie-footer">
                                         <span className="price">{movie.price}</span>
                                         <Button variant="primary" className="book-btn">Book Now</Button>
+                                        <Button variant="outline-secondary" className="btn-sm watchlist-btn">Add to watchlist</Button>
                                     </div>
                                 </Card.Body>
                             </Card>

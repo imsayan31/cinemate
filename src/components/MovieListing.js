@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import '../styles/MovieListing.scss';
 
 import Loader from './Loader';

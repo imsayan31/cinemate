@@ -57,6 +57,9 @@ function MovieListView({ movies = [], loading }) {
                   <Button variant="outline-primary" className="btn-sm book-btn">
                     Book
                   </Button>
+                  <Button variant="primary" className="btn-sm book-btn watchlist-btn">
+                    Add to watchlist
+                  </Button>
                 </div>
               </div>
             </ListGroup.Item>

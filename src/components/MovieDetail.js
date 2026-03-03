@@ -66,7 +66,7 @@ function MovieDetail() {
       <div className="movie-hero">
         <Container>
           <Row className="hero-content">
-            <Col lg={4} md={6} sm={12} className="movie-poster-col">
+            <Col lg={3} md={4} sm={12} className="movie-poster-col">
               <div className="movie-poster">
                 <div className="poster-image">
                   <img src={movieDetail?.poster || movie.image} alt={movieDetail?.title} className="poster-image" />

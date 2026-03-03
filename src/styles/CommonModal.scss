@@ -1,0 +1,83 @@
+.common-modal .modal-content {
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.common-modal .modal-header {
+  background-color: #282c34;
+  border-bottom: 1px solid #333;
+  padding: 1.5rem;
+}
+
+.common-modal .modal-title {
+  color: #ff6b35;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.common-modal .modal-header .btn-close {
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.common-modal .modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+.common-modal .modal-body {
+  padding: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.common-modal .modal-footer {
+  background-color: #282c34;
+  border-top: 1px solid #333;
+  padding: 1.5rem;
+  gap: 10px;
+}
+
+/* dim the backdrop and keep above other content */
+.common-modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  z-index: 1040;
+}
+
+.common-modal .modal-dialog {
+  z-index: 1050;
+}
+
+.common-modal .btn-secondary,
+.common-modal .btn-primary {
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.common-modal .btn-secondary {
+  background-color: #ff6b35;
+  border: none;
+  color: #fff;
+}
+
+.common-modal .btn-secondary:hover {
+  background-color: #ff5722;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}
+
+.common-modal .btn-primary {
+  background-color: #ff6b35;
+  border: none;
+  color: #fff;
+}
+
+.common-modal .btn-primary:hover {
+  background-color: #ff5722;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+}

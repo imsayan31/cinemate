@@ -1,3 +1,4 @@
+@import 'bootstrap/scss/bootstrap';
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
 * {
@@ -6,8 +7,13 @@
   box-sizing: border-box;
 }
 
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 html {
-  padding: 0 20px;
+  padding: 0 20px !important;
 }
 
 body {
@@ -37,28 +43,36 @@ html, body, #root {
 }
 
 .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
+
+/* override bootstrap's default margins */
+p, h1, h2, h3, h4, h5, h6 {
+  margin-bottom: revert;
+}
+
 
 @media (min-width: 576px) {
   html {
-    padding: 0 30px;
+    padding: 0 30px !important;
   }
 
   .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
   }
 }
 
 @media (min-width: 768px) {
   html {
-    padding: 0 40px;
+    padding: 0 40px !important;
   }
 
   .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
   }
 }
