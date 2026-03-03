@@ -60,12 +60,14 @@
   }
 
   .movies-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
     gap: 30px;
+    width: 100%;
+    margin: 0 !important;
 
     .movie-col {
-      margin-bottom: 20px;
+      margin-bottom: 0 !important;
     }
 
     a {
@@ -101,11 +103,19 @@
       }
 
       .movie-image {
-        font-size: 60px;
-        text-align: center;
-        padding: 30px;
+        height: 300px;
         background-color: #1a1a1a;
         transition: transform 0.3s ease;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
 
       .card-title {
