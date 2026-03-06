@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import '../styles/MovieListing.scss';
 
 import Loader from './Loader';
 import MovieListView from './MovieListView';
 import MovieGridView from './MovieGridView';
+import Filter from './filters/Filter';
+import useFetchFilterElements from '../hooks/useFetchFilterElements';
 
 function MovieListing() {
     const [movies, setMovies] = useState([]);
     const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
     const [loading, setLoading] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filterGenre, setFilterGenre] = useState('');
+    const [filterLanguage, setFilterLanguage] = useState('');
+    const { genres, languages } = useFetchFilterElements(movies);
 
     useEffect(() => {
         // Simulate fetching data from an API
@@ -30,6 +36,21 @@ function MovieListing() {
         fetchMovies();
     }, []);
 
+    const filteredMovies = useMemo(() => {
+        // if (!searchTerm) return movies;
+        return movies.filter(movie => {
+          if(!searchTerm && !filterGenre.target?.value && !filterLanguage.target?.value) {
+            return true; // no filters applied, include all movies
+          }
+          const textSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+          const genreSearch = filterGenre.target?.value ? movie.genre === filterGenre.target?.value : true;
+          const languageSearch = filterLanguage.target?.value ? movie.language === filterLanguage.target?.value : true;
+          console.log('Filtering attributes:', { searchTerm, filterGenre: filterGenre.target?.value, filterLanguage: filterLanguage.target?.value });
+          console.log('Filtering movie:', movie.title, { textSearch, genreSearch, languageSearch });
+          return textSearch && genreSearch && languageSearch;
+        });
+    }, [movies, searchTerm, filterGenre, filterLanguage]);
+
   return (
     <section className="movie-listing">
       {loading && <Loader />}
@@ -38,6 +59,17 @@ function MovieListing() {
           <h2>Now Showing</h2>
           <p>Book your tickets for the latest blockbuster movies</p>
         </div>
+        <section className="filters-section">
+          <Filter 
+          searchTerm={searchTerm} 
+          setSearchTerm={setSearchTerm} 
+          genre={filterGenre.target?.value} 
+          setGenre={setFilterGenre} 
+          language={filterLanguage.target?.value} 
+          setLanguage={setFilterLanguage}
+          genres={genres}
+          languages={languages} />
+        </section>
         <section className="movies-filter-section" aria-label="View toggle">
             <button
               className={`view-toggle-btn ${viewMode === 'grid' ? 'active' : ''}`}
@@ -60,10 +92,10 @@ function MovieListing() {
         </section>
         {viewMode === 'list' ? (
           <div className="movies-list-container">
-            <MovieListView movies={movies} loading={loading} />
+            <MovieListView movies={filteredMovies} loading={loading} />
           </div>
         ) : (
-          <MovieGridView movies={movies} loading={loading} />
+          <MovieGridView movies={filteredMovies} loading={loading} />
         )}
       </Container>
     </section>

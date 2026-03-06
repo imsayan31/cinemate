@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListGroup, Button, Badge } from 'react-bootstrap';
 import '../styles/MovieListing.scss';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -6,8 +6,11 @@ import Loader from './Loader';
 
 // simple list view -- remove react-window complexity
 function MovieListView({ movies = [], loading }) {
-  const [movieList, setMovieList] = useState(movies.slice(0, 5)); // initial load of 20 movies
+  const [movieList, setMovieList] = useState([]); // initial load of 20 movies
   const [hasMore, setHasMore] = useState(true);
+  useEffect(() => {
+    setMovieList(movies.slice(0, 5));
+  }, [movies]);
   const fetchMoreData = () => {
     if (movieList.length >= movies.length) {
       setHasMore(false);
@@ -21,14 +24,11 @@ function MovieListView({ movies = [], loading }) {
       next={fetchMoreData}
       hasMore={hasMore}
       loader={ loading && <Loader /> }
-      endMessage={
-        <p style={{ textAlign: 'center' }}>
-          <b>No more movies to show</b>
-        </p>
-      }
+      endMessage=""
     >
       <div className="list-view">
         <ListGroup variant="flush">
+          {movieList.length === 0 && <p>No movies to show</p>}
           {movieList.map((movie) => (
             <ListGroup.Item key={movie?.id ?? Math.random()} className="list-item">
               <div className="list-row">
@@ -46,8 +46,8 @@ function MovieListView({ movies = [], loading }) {
                     <Badge bg="warning" className="genre">
                       {movie?.genre}
                     </Badge>
-                    <span className="rating">⭐ {movie?.rating}</span>
-                    <span className="duration">{movie?.duration}</span>
+                    <span className="rating">⭐ {movie?.imdbRating}</span>
+                    <p className="duration">{movie?.language}</p>
                   </div>
                   <p className="list-desc">{movie?.description}</p>
                 </div>

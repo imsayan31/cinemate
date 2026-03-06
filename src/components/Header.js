@@ -3,6 +3,7 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import '../styles/Header.scss';
 import { NavLink } from 'react-router-dom';
 import CommonModal from './CommonModal';
+import LoginForm from './LogInForm';
 
 function Header() {
   const [showLoginForm, setShowLoginForm] = useState(false);
@@ -29,7 +30,8 @@ function Header() {
           onHide={() => setShowLoginForm(false)}
           title="Sign In"
         >
-          <p>Please sign in to your account.</p>
+          {/* theme can be passed in from higher context or state; dark is default movie style */}
+          <LoginForm theme="dark" />
         </CommonModal>
       </Container>
     </Navbar>

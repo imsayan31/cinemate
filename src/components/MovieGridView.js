@@ -4,16 +4,13 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
 function MovieGridView({ movies = [], loading }) {
-    const [movieList, setMovieList] = useState(movies.slice(0, 4)); // initial load of 20 movies
+    const [movieList, setMovieList] = useState([]); // initial load of 20 movies
     const [hasMore, setHasMore] = useState(true);
-
     // sync movieList when movies prop changes (e.g., after API fetch completes)
     useEffect(() => {
-        if (movies.length > 0) {
-            setMovieList(movies.slice(0, 4));
-            setHasMore(true);
-        }
-    }, [movies, movies.length]);
+        setMovieList(movies.slice(0, 4));
+    }, [movies]);
+
     const fetchMoreData = () => {
         if (movieList.length >= movies.length) {
             setHasMore(false);
@@ -34,6 +31,7 @@ function MovieGridView({ movies = [], loading }) {
             }
         >
             <Row className="w-100 movies-grid">
+                {movieList.length === 0 && <p>No movies to show</p>}
                 {movieList.map(movie => (
                     <Col lg={3} md={6} sm={12} key={movie.id} className="movie-col">
                         <Link to={`/movie/${movie.id}`} className="movie-link">
@@ -45,7 +43,8 @@ function MovieGridView({ movies = [], loading }) {
                                     <Card.Title>{movie.title}</Card.Title>
                                     <div className="movie-meta">
                                         <span className="genre">{movie.genre}</span>
-                                        <span className="rating">⭐ {movie.rating}</span>
+                                        <span className="rating">⭐ {movie?.imdbRating}</span>
+                                        <p className="duration">{movie?.language}</p>
                                     </div>
                                     <Card.Text className="description">{movie.description}</Card.Text>
                                     <div className="movie-footer">
