@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader";
+import Watchlist from "./components/Watchlist";
 const Home = lazy(() => import('./components/Home'));
 const MovieListing = lazy(() => import('./components/MovieListing'));
 const MovieDetail = lazy(() => import('./components/MovieDetail'));
@@ -14,6 +15,7 @@ function AllRoutes() {
                 <Route path="/" element={<Home />} />
                 <Route path="/movies" element={<MovieListing />} />
                 <Route path="/movie/:id" element={<MovieDetail />} />
+                <Route path="/watchlist" element={<Watchlist />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>

@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { 
+  useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import '../styles/MovieListing.scss';
 
@@ -8,12 +9,12 @@ import MovieGridView from './MovieGridView';
 import Filter from './filters/Filter';
 import useFetchFilterElements from '../hooks/useFetchFilterElements';
 
-const checkMovies = [
+/* const checkMovies = [
     { id: 1, title: "Inception" },
     { id: 2, title: "Interstellar" },
-  ];
+]; */
 
-const MovieCheckList = React.memo(({ movies, onSelect }) => {
+/* const MovieCheckList = React.memo(({ movies, onSelect }) => {
   // console.log("🎬 MovieCheckList re-rendered");
   return (
     <ul>
@@ -24,7 +25,7 @@ const MovieCheckList = React.memo(({ movies, onSelect }) => {
       ))}
     </ul>
   );
-});
+}); */
 
 
 function MovieListing() {
@@ -35,8 +36,6 @@ function MovieListing() {
     const [filterGenre, setFilterGenre] = useState('');
     const [filterLanguage, setFilterLanguage] = useState('');
     const { genres, languages } = useFetchFilterElements(movies);
-
-    const [count, setCount] = useState(0);
 
 
     useEffect(() => {
@@ -77,9 +76,9 @@ function MovieListing() {
     console.log("Selected:", movie.title);
   }; */
 
-  const handleSelect = useCallback((movie) => {
+  /* const handleSelect = useCallback((movie) => {
     //console.log("Selected:", movie.title);
-  }, []);
+  }, []); */
 
   
 
@@ -94,9 +93,9 @@ function MovieListing() {
           <h2>Now Showing</h2>
           <p>Book your tickets for the latest blockbuster movies</p>
         </div>
-        <button onClick={() => setCount(count + 1)}>Increment: {count}</button>
+        {/* <button onClick={() => setCount(count + 1)}>Increment: {count}</button>
 
-        <MovieCheckList movies={checkMovies} onSelect={handleSelect} />
+        <MovieCheckList movies={checkMovies} onSelect={handleSelect} /> */}
 
         <section className="filters-section">
           <Filter 

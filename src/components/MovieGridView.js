@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Col, Card, Button, Row } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
+import WatchListContext from '../context/watchlist/WatchListContext';
+
 function MovieGridView({ movies = [], loading }) {
     const [movieList, setMovieList] = useState([]); // initial load of 20 movies
     const [hasMore, setHasMore] = useState(true);
+    const { addItemToWatchlist, removeItemFromWatchlist, isItemInWatchlist } = useContext(WatchListContext);
     // sync movieList when movies prop changes (e.g., after API fetch completes)
     useEffect(() => {
         setMovieList(movies.slice(0, 4));
@@ -50,7 +53,18 @@ function MovieGridView({ movies = [], loading }) {
                                     <div className="movie-footer">
                                         <span className="price">{movie.price}</span>
                                         <Button variant="primary" className="book-btn">Book Now</Button>
-                                        <Button variant="outline-secondary" className="btn-sm watchlist-btn">Add to watchlist</Button>
+                                        <Button 
+                                            variant="outline-secondary" 
+                                            className="btn-sm watchlist-btn"
+                                            onClick={(e) => {
+                                                e.preventDefault(); // prevent card link navigation
+                                                isItemInWatchlist(movie.id) 
+                                                ? removeItemFromWatchlist(movie.id) 
+                                                : addItemToWatchlist(movie);
+                                            }}
+                                            >
+                                            { isItemInWatchlist(movie.id) ? 'Remove from watchlist' : 'Add to watchlist' }
+                                        </Button>
                                     </div>
                                 </Card.Body>
                             </Card>

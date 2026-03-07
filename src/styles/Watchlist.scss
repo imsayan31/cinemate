@@ -1,0 +1,143 @@
+// Watchlist styles - table format matching movie theme
+.watchlist {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  min-height: 80vh;
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+
+    .header-text {
+      text-align: left;
+
+      h2 {
+        font-size: 36px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #bbb;
+        margin-bottom: 0;
+      }
+    }
+
+    .clear-btn {
+      background-color: transparent;
+      border-color: #ff6b35;
+      color: #ff6b35;
+      padding: 8px 16px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: #ff6b35;
+        border-color: #ff6b35;
+        color: #fff;
+      }
+    }
+  }
+
+  .empty-watchlist {
+    text-align: center;
+    padding: 50px 20px;
+
+    p {
+      font-size: 18px;
+      color: #bbb;
+      margin-bottom: 20px;
+    }
+
+    .explore-btn {
+      background-color: #ff6b35;
+      border-color: #ff6b35;
+      color: #fff;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #ff5722;
+        border-color: #ff5722;
+      }
+    }
+  }
+
+  .watchlist-table-container {
+    overflow-x: auto;
+
+    .watchlist-table {
+      background-color: #2a2a2a;
+      color: #fff;
+      border-color: #3a3a3a;
+
+      thead th {
+        background-color: #1a1a1a;
+        border-color: #3a3a3a;
+        color: #ff6b35;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      tbody td {
+        border-color: #3a3a3a;
+        vertical-align: middle;
+        text-align: center;
+
+        &.movie-title-cell {
+          text-align: left;
+          font-weight: 500;
+        }
+
+        &.actions-cell {
+          .action-btn {
+            margin: 0 5px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+
+            &.btn-outline-primary {
+              border-color: #ff6b35;
+              color: #ff6b35;
+
+              &:hover {
+                background-color: #ff6b35;
+                border-color: #ff6b35;
+              }
+            }
+
+            &.btn-outline-danger {
+              border-color: #dc3545;
+              color: #dc3545;
+
+              &:hover {
+                background-color: #dc3545;
+                border-color: #dc3545;
+              }
+            }
+          }
+        }
+      }
+
+      .table-poster {
+        width: 60px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      tbody tr {
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+  }
+}

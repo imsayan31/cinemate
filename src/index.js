@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ThemeProvider from './context/ThemeProvider';
 import LanguageProvider from './context/LanguageProvider';
+import WatchlistProvider from './context/watchlist/WatchListProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+    <WatchlistProvider>
       <ThemeProvider>
         <LanguageProvider>
           <App />
         </LanguageProvider>
       </ThemeProvider>
+    </WatchlistProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .form-select {
+      width: 10%;
+      margin-left: 15px;
+    }
   }
 
   .brand {
@@ -53,6 +57,40 @@
 
       &.active {
         color: #ff6b35 !important;
+      }
+    }
+
+    .watchlist-btn {
+      border: none;
+      padding: 10px 20px !important;
+      background-color: transparent !important;
+      color: #fff !important;
+      font-weight: 500;
+      margin-left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: color 0.3s ease;
+      text-decoration: none !important;
+
+      i {
+        font-size: 16px;
+      }
+
+      &:hover {
+        color: #ff6b35 !important;
+      }
+
+      .watchlist-badge {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 10px;
+        padding: 2px 5px;
+        border-radius: 50%;
+        background-color: #ff6b35;
+        color: #fff;
       }
     }
 
@@ -109,6 +147,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .form-select {
+        width: 10%;
+        margin-left: 15px;
+      }
     }
 
     .brand {
