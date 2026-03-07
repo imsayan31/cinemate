@@ -4,6 +4,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Link } from 'react-router-dom';
 import Loader from './Loader';
 import WatchListContext from '../context/watchlist/WatchListContext';
+import { toast } from 'react-toastify';
 
 function MovieGridView({ movies = [], loading }) {
     const [movieList, setMovieList] = useState([]); // initial load of 20 movies
@@ -61,6 +62,7 @@ function MovieGridView({ movies = [], loading }) {
                                                 isItemInWatchlist(movie.id) 
                                                 ? removeItemFromWatchlist(movie.id) 
                                                 : addItemToWatchlist(movie);
+                                                toast.success(isItemInWatchlist(movie.id) ? 'Removed from watchlist' : 'Added to watchlist');
                                             }}
                                             >
                                             { isItemInWatchlist(movie.id) ? 'Remove from watchlist' : 'Add to watchlist' }
