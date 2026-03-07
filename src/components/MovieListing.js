@@ -14,7 +14,7 @@ const checkMovies = [
   ];
 
 const MovieCheckList = React.memo(({ movies, onSelect }) => {
-  console.log("🎬 MovieCheckList re-rendered");
+  // console.log("🎬 MovieCheckList re-rendered");
   return (
     <ul>
       {movies.map((movie) => (
@@ -73,15 +73,15 @@ function MovieListing() {
 
     
 
-  const handleSelect = (movie) => {
+  /* const handleSelect = (movie) => {
     console.log("Selected:", movie.title);
-  };
+  }; */
 
-  /* const handleSelect = useCallback((movie) => {
-    console.log("Selected:", movie.title);
-  }, []); */
+  const handleSelect = useCallback((movie) => {
+    //console.log("Selected:", movie.title);
+  }, []);
 
-  console.log("🔄 Parent re-rendered");
+  
 
 
 
