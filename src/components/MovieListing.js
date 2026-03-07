@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import '../styles/MovieListing.scss';
 
@@ -8,6 +8,25 @@ import MovieGridView from './MovieGridView';
 import Filter from './filters/Filter';
 import useFetchFilterElements from '../hooks/useFetchFilterElements';
 
+const checkMovies = [
+    { id: 1, title: "Inception" },
+    { id: 2, title: "Interstellar" },
+  ];
+
+const MovieCheckList = React.memo(({ movies, onSelect }) => {
+  console.log("🎬 MovieCheckList re-rendered");
+  return (
+    <ul>
+      {movies.map((movie) => (
+        <li key={movie.id} onClick={() => onSelect(movie)}>
+          {movie.title}
+        </li>
+      ))}
+    </ul>
+  );
+});
+
+
 function MovieListing() {
     const [movies, setMovies] = useState([]);
     const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
@@ -16,6 +35,9 @@ function MovieListing() {
     const [filterGenre, setFilterGenre] = useState('');
     const [filterLanguage, setFilterLanguage] = useState('');
     const { genres, languages } = useFetchFilterElements(movies);
+
+    const [count, setCount] = useState(0);
+
 
     useEffect(() => {
         // Simulate fetching data from an API
@@ -45,11 +67,24 @@ function MovieListing() {
           const textSearch = movie.title.toLowerCase().includes(searchTerm.toLowerCase())
           const genreSearch = filterGenre.target?.value ? movie.genre === filterGenre.target?.value : true;
           const languageSearch = filterLanguage.target?.value ? movie.language === filterLanguage.target?.value : true;
-          console.log('Filtering attributes:', { searchTerm, filterGenre: filterGenre.target?.value, filterLanguage: filterLanguage.target?.value });
-          console.log('Filtering movie:', movie.title, { textSearch, genreSearch, languageSearch });
           return textSearch && genreSearch && languageSearch;
         });
     }, [movies, searchTerm, filterGenre, filterLanguage]);
+
+    
+
+  const handleSelect = (movie) => {
+    console.log("Selected:", movie.title);
+  };
+
+  /* const handleSelect = useCallback((movie) => {
+    console.log("Selected:", movie.title);
+  }, []); */
+
+  console.log("🔄 Parent re-rendered");
+
+
+
 
   return (
     <section className="movie-listing">
@@ -59,16 +94,20 @@ function MovieListing() {
           <h2>Now Showing</h2>
           <p>Book your tickets for the latest blockbuster movies</p>
         </div>
+        <button onClick={() => setCount(count + 1)}>Increment: {count}</button>
+
+        <MovieCheckList movies={checkMovies} onSelect={handleSelect} />
+
         <section className="filters-section">
           <Filter 
-          searchTerm={searchTerm} 
-          setSearchTerm={setSearchTerm} 
-          genre={filterGenre.target?.value} 
-          setGenre={setFilterGenre} 
-          language={filterLanguage.target?.value} 
-          setLanguage={setFilterLanguage}
-          genres={genres}
-          languages={languages} />
+            searchTerm={searchTerm} 
+            setSearchTerm={setSearchTerm} 
+            genre={filterGenre.target?.value} 
+            setGenre={setFilterGenre} 
+            language={filterLanguage.target?.value} 
+            setLanguage={setFilterLanguage}
+            genres={genres}
+            languages={languages} />
         </section>
         <section className="movies-filter-section" aria-label="View toggle">
             <button
