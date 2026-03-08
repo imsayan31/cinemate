@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import '../styles/Contact.scss';
+import Counter from './Counter';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -39,6 +40,10 @@ function Contact() {
           <h1>Contact Us</h1>
           <p>We'd love to hear from you. Get in touch with us today!</p>
         </div>
+
+        <Row className="contact-content">
+          <Counter />
+        </Row>
 
         <Row className="contact-content">
           {/* Contact Information */}

@@ -18,8 +18,7 @@ function Header() {
   const { watchlist } = useContext(WatchListContext);
   const authData = useSelector(state => state.auth);
   const authDispatch = useDispatch();
-  console.log(`authData`, authData);
-
+  
   useEffect(() => {
     authData.isAuthenticated ? setShowLoginForm(false) : setShowLoginForm(false);
   }, [authData]);
