@@ -7,18 +7,22 @@ import { BrowserRouter } from 'react-router-dom';
 import ThemeProvider from './context/ThemeProvider';
 import LanguageProvider from './context/LanguageProvider';
 import WatchlistProvider from './context/watchlist/WatchListProvider';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <WatchlistProvider>
-      <ThemeProvider>
-        <LanguageProvider>
-          <App />
-        </LanguageProvider>
-      </ThemeProvider>
-    </WatchlistProvider>
+    <Provider store={store}>
+      <WatchlistProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <App />
+          </LanguageProvider>
+        </ThemeProvider>
+      </WatchlistProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

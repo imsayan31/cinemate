@@ -3,15 +3,20 @@ import { Container, Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../styles/Watchlist.scss';
 import WatchListContext from '../context/watchlist/WatchListContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { showSuccessMessage } from '../features/message/messageSlice';
 
 const Watchlist = () => {
     const { watchlist, removeItemFromWatchlist, clearWatchlist } = useContext(WatchListContext);
     const [watchlistMovies, setWatchlistMovies] = useState([]);
+    const dispatch = useDispatch();
+    const message = useSelector(state => state);
 
     useEffect(() => {
         setWatchlistMovies(watchlist);
-        console.log('watchlist updated:', watchlist);
-    }, [watchlist]);
+            console.log('watchlist updated:', watchlist);
+            console.log('message:', message);
+    }, [watchlist, message]);
 
   return (
     <section className="watchlist">
@@ -80,6 +85,14 @@ const Watchlist = () => {
                         onClick={() => removeItemFromWatchlist(movie.id)}
                       >
                         Remove
+                      </Button>
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        className="action-btn"
+                        onClick={() => dispatch(showSuccessMessage("Form submitted successfully!"))}
+                      >
+                        Show Message
                       </Button>
                     </td>
                   </tr>

@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/LogInForm.scss';
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../features/auth/authSlice';
+import { showSuccessMessage } from '../features/message/messageSlice';
 
 
 // if no theme specified, dark (movie style) is used
 const LoginForm = ({ theme = 'dark' }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const randomId = Math.floor(Math.random() * 10) + 1;
+  const authDispatch = useDispatch();
+  const messageDispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: call auth API, set error state, etc.
-    console.log('logging in', { email, password });
+    const userData = await fetch('https://fooapi.com/api/users/' + randomId);
+    const userDataJson = await userData.json();
+    if(userDataJson.data) {
+      authDispatch(loginSuccess({user: userDataJson.data, token: randomId, isAuthenticated: true}));
+      messageDispatch(showSuccessMessage('Logged in successfully!'));
+    }
   };
 
   return (
